@@ -8,3 +8,6 @@ python setup.py install
 # If using ambertools
 # amber.python setup.py install
 ```
+
+# Example
+[here](./examples)
