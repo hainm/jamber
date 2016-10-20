@@ -1,4 +1,6 @@
 from jamber import leap
+from jamber.utils import tempfolder
+import parmed as pmd
 
 def test_leap():
     command = """
@@ -7,4 +9,7 @@ def test_leap():
     saveamberparm seq seq.prmtop seq.rst7
     """
 
-    leap.build(command)
+    with tempfolder():
+        leap.build(command)
+        parm = pmd.load_file('seq.prmtop')
+        assert len(parm.atoms) == 30
