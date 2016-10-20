@@ -5,4 +5,5 @@ from .base import amberbin
 def run(command):
     if 'sander' not in command:
         command = ' '.join((amberbin('sander'), command))
+        print('command', command)
     return Popen(command.split())
