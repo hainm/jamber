@@ -10,4 +10,21 @@ python setup.py install
 ```
 
 # Example
-[here](./examples)
+- [notebooks](./examples)
+
+- leap
+```python
+    from jamber import leap
+    command = """
+    source leaprc.protein.ff14SB
+    seq = sequence {ALA ALA ALA}
+    saveamberparm seq seq.prmtop seq.rst7
+    """
+    leap.build(command)
+```
+
+- nab
+```python
+from jamber import nab
+nab.build_bdna(seq='AAAAAA', filename='nuc.pdb')
+```
