@@ -41,3 +41,12 @@ def test_nab_adna():
         nu = pt.nastruct(traj)
         aa_eq(np.mean(nu.major[1]), [15.721,], decimal=3)
         aa_eq(np.mean(nu.minor[1]), [18.398,], decimal=3)
+
+def test_nab_arna():
+    with tempfolder():
+        filename = 'nuc.pdb'
+        nab.build_arna('AAAAAAAAAA', filename=filename)
+        traj = pt.load(filename)
+        nu = pt.nastruct(traj)
+        aa_eq(np.mean(nu.major[1]), [15.183,], decimal=3)
+        aa_eq(np.mean(nu.minor[1]), [18.804,], decimal=3)

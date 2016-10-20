@@ -37,8 +37,5 @@ def build_adna(seq, filename='nuc.pdb'):
 def build_bdna(seq, filename='nuc.pdb'):
     build(seq, filename=filename, nuc_type='abdna')
 
-def build_adna(seq, filename='nuc.pdb'):
+def build_arna(seq, filename='nuc.pdb'):
     build(seq, filename=filename, nuc_type='arna')
-
-def build_bdna(seq, filename='nuc.pdb'):
-    build(seq, filename=filename, nuc_type='brna')
