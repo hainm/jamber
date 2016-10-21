@@ -38,3 +38,4 @@ traj = build_protein(seq, ['alpha:1-5'])
 # traj is pytraj.Trajectory
 traj.save("new.pdb")
 ```
+![](examples/images/builder_ala10.png)
