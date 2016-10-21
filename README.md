@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hainm/jamber.svg?branch=test)](https://travis-ci.org/hainm/jamber)
+
 Wrapping some of AmberTools's programs for Jupyter notebook.
 
 # Install
