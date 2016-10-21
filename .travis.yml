@@ -10,8 +10,17 @@ sudo: True
 
 addons:
   apt:
+    sources:
+    - ubuntu-toolchain-r-test
     packages:
     - g++
+    - gfortran
+    - clang
+    - libz-dev
+    - libbz2-dev
+    - libblas-dev
+    - liblapack-dev
+    - libarpack2-dev
     - libnetcdf-dev
 
 install:
