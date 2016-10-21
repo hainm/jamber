@@ -28,3 +28,13 @@ python setup.py install
 from jamber import nab
 nab.build_bdna(seq='AAAAAA', filename='nuc.pdb')
 ```
+
+- build protein with given secondary structure
+
+```python
+from jamber.builder import build_protein
+seq = 'ALA ALA ALA ALA ALA'
+traj = build_protein(seq, ['alpha:1-5'])
+# traj is pytraj.Trajectory
+traj.save("new.pdb")
+```
