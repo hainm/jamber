@@ -1,0 +1,30 @@
+language: cpp
+
+matrix:
+  include:
+    - { os: linux, env: PYTHON_VERSION=2.7 }
+    - { os: linux, env: PYTHON_VERSION=3.4 }
+    - { os: linux, env: PYTHON_VERSION=3.5 }
+
+sudo: True
+
+addons:
+  apt:
+    packages:
+    - g++
+    - libnetcdf-dev
+
+install:
+    - sudo apt-get install libfftw3-3
+    
+script:
+    - source devtools/travis-ci/install_pytraj.sh
+    - source devtools/travis-ci/setup_env.sh
+    - python setup.py install
+    - py.test -vs .
+
+after_success:
+    - echo "hello there"
+
+notifications:
+  email: false
