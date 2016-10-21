@@ -1,10 +1,7 @@
 import os
 import time
 from jamber import sander
-from jamber.utils import tempfolder
-
-# local
-from utils import get_fn
+from jamber.utils import tempfolder, get_fn
 
 def test_sander():
     prmtop = get_fn('peptide.top')
