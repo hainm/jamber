@@ -28,8 +28,8 @@ install:
     
 script:
     - source devtools/travis-ci/setup_env.sh
-    - source devtools/travis-ci/install_pytraj.sh
     - python setup.py install
+    - export AMBERHOME=`'import sys; print(sys.prefix)'`
     - py.test -vs jamber/
 
 after_success:
