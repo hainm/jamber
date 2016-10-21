@@ -11,6 +11,10 @@ def build_protein(seq, command):
     command : str or list of str
         pytraj command for building secondary structure for a given residue range
 
+    Requires
+    --------
+    tleap, pytraj
+
     Examples
     --------
     >>> from jamber import build
