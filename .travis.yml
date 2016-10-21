@@ -30,7 +30,7 @@ script:
     - source devtools/travis-ci/setup_env.sh
     - source devtools/travis-ci/install_pytraj.sh
     - python setup.py install
-    - py.test -vs .
+    - py.test -vs jamber/
 
 after_success:
     - echo "hello there"
