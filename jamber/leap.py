@@ -12,3 +12,4 @@ def build(command):
     build_command = '{} -f {}'.format(amberbin('tleap'), fn).split()
     subprocess.check_output(build_command)
     os.unlink(fn)
+    os.unlink('leap.log')
