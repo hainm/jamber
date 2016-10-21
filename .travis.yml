@@ -27,8 +27,8 @@ install:
     - sudo apt-get install libfftw3-3
     
 script:
-    - source devtools/travis-ci/install_pytraj.sh
     - source devtools/travis-ci/setup_env.sh
+    - source devtools/travis-ci/install_pytraj.sh
     - python setup.py install
     - py.test -vs .
 
