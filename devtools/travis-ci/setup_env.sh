@@ -29,3 +29,6 @@ conda install ambermini -c omnia --yes
 
 # sander
 conda install sander -c ambermd --yes
+
+# pytraj
+pip install pytraj

@@ -10,18 +10,27 @@ sudo: True
 
 addons:
   apt:
+    sources:
+    - ubuntu-toolchain-r-test
     packages:
     - g++
+    - gfortran
+    - clang
+    - libz-dev
+    - libbz2-dev
+    - libblas-dev
+    - liblapack-dev
+    - libarpack2-dev
     - libnetcdf-dev
 
 install:
     - sudo apt-get install libfftw3-3
     
 script:
-    - source devtools/travis-ci/install_pytraj.sh
     - source devtools/travis-ci/setup_env.sh
     - python setup.py install
-    - py.test -vs .
+    - export AMBERHOME=`python -c 'import sys; print(sys.prefix)'`
+    - py.test -vs jamber/
 
 after_success:
     - echo "hello there"
