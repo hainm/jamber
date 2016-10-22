@@ -10,6 +10,9 @@ python setup.py install
 # If using ambertools
 # amber.python setup.py install
 ```
+# Require
+- AmberTools >= 16
+- nglview (optional): For visualization in Jupyter notebook
 
 # Example
 - [notebooks](./examples)
