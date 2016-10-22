@@ -1,3 +1,4 @@
+import os
 import pytraj as pt
 from . import leap
 from .utils import tempfolder
@@ -36,6 +37,10 @@ def build_protein(seq, command):
     x = sequence{%s}
     savepdb x %s
     """ % (seq, pdb_fn)
+
+    amberhome = os.getenv('AMBERHOME')
+    if  os.path.exists(amberhome + '/dat/leap/cmd/leaprc.ff14SB'):
+        leap_command = leap_command.replace('protein.ff14SB', 'ff14SB')
 
     with tempfolder():
         leap.build(leap_command)
