@@ -44,7 +44,7 @@ def build_protein(seq, command):
         leap_command = leap_command.replace('protein.ff14SB', 'ff14SB')
 
     with tempfolder():
-        leap.build(leap_command)
+        leap.run(leap_command)
         traj = pt.load(pdb_fn)
         return pt.make_structure(traj, command)
 

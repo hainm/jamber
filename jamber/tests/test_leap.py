@@ -10,6 +10,6 @@ def test_leap():
     """
 
     with tempfolder():
-        leap.build(command)
+        leap.run(command)
         parm = pmd.load_file('seq.prmtop')
         assert len(parm.atoms) == 30

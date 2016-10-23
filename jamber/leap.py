@@ -3,7 +3,7 @@ import os
 import subprocess
 from .base import amberbin
 
-def build(command):
+def run(command):
     fn = 'jamber_tmp.in'
     if 'quit' not in command:
         command = command + '\nquit'
