@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/hainm/jamber.svg?branch=test)](https://travis-ci.org/hainm/jamber)
 
-Wrapping some of AmberTools's programs for Jupyter notebook.
+Wrapping some of AmberTools's programs for Jupyter notebook. Please do not use this for your production.
 
 # Install
 ```bash
@@ -28,10 +28,10 @@ python setup.py install
     leap.build(command)
 ```
 
-- nab
+- builder
 ```python
-from jamber import nab
-nab.build_bdna(seq='AAAAAA', filename='nuc.pdb')
+from jamber.builder import build_bdna
+build_bdna(seq='AAAAAA')
 ```
 
 - build protein with given secondary structure
