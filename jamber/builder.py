@@ -4,6 +4,13 @@ from . import leap
 from .utils import tempfolder
 from . import nab
 
+__all__ = [
+        'build_protein',
+        'build_adna',
+        'build_bdna',
+        'build_arna'
+]
+
 def build_protein(seq, command):
     '''
 
