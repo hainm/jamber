@@ -7,6 +7,7 @@ from jamber import nab
 from jamber.base import amberbin
 from jamber.utils import tempfolder
 from jamber import nab, leap
+from jamber import builder
 
 try:
     nabin = amberbin('nab')
@@ -33,8 +34,7 @@ def test_nab():
 
 def test_nab_bdna():
     with tempfolder():
-        nab.build_bdna('AAAAAAAAAA', filename='nuc.pdb')
-        traj = pt.load('nuc.pdb')
+        traj = builder.build_bdna('AAAAAAAAAA')
         nu = pt.nastruct(traj)
         aa_eq(np.mean(nu.major[1]), [17.246,], decimal=3)
         aa_eq(np.mean(nu.minor[1]), [11.459,], decimal=3)
@@ -42,8 +42,7 @@ def test_nab_bdna():
 def test_nab_adna():
     with tempfolder():
         filename = 'nuc.pdb'
-        nab.build_adna('AAAAAAAAAA', filename=filename)
-        traj = pt.load(filename)
+        traj = builder.build_adna('AAAAAAAAAA')
         nu = pt.nastruct(traj)
         aa_eq(np.mean(nu.major[1]), [15.721,], decimal=3)
         aa_eq(np.mean(nu.minor[1]), [18.398,], decimal=3)
@@ -51,8 +50,7 @@ def test_nab_adna():
 def test_nab_arna():
     with tempfolder():
         filename = 'nuc.pdb'
-        nab.build_arna('AAAAAAAAAA', filename=filename)
-        traj = pt.load(filename)
+        traj = builder.build_arna('AAAAAAAAAA')
         nu = pt.nastruct(traj)
         aa_eq(np.mean(nu.major[1]), [15.183,], decimal=3)
         aa_eq(np.mean(nu.minor[1]), [18.804,], decimal=3)

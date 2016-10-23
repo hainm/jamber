@@ -2,6 +2,7 @@ import os
 import pytraj as pt
 from . import leap
 from .utils import tempfolder
+from . import nab
 
 def build_protein(seq, command):
     '''
@@ -46,3 +47,22 @@ def build_protein(seq, command):
         leap.build(leap_command)
         traj = pt.load(pdb_fn)
         return pt.make_structure(traj, command)
+
+def _nab_build(seq, filename, nuc_type='abdna'):
+    command = """
+    molecule m; 
+    m = fd_helix( "{}", "{}", "{}" );
+    putpdb("{}", m, "-wwpdb");
+    """.format(nuc_type, seq, nuc_type[-3:], filename)
+    with tempfolder():
+        nab.run(command)
+        return pt.load(filename)
+
+def build_adna(seq, filename='nuc.pdb'):
+    return _nab_build(seq, filename=filename, nuc_type='adna')
+
+def build_bdna(seq, filename='nuc.pdb'):
+    return _nab_build(seq, filename=filename, nuc_type='abdna')
+
+def build_arna(seq, filename='nuc.pdb'):
+    return _nab_build(seq, filename=filename, nuc_type='arna')

@@ -23,19 +23,3 @@ def run(command):
     os.unlink(nabout)
     os.unlink(nabc)
 
-def build(seq, filename, nuc_type='abdna'):
-    command = """
-    molecule m; 
-    m = fd_helix( "{}", "{}", "{}" );
-    putpdb("{}", m, "-wwpdb");
-    """.format(nuc_type, seq, nuc_type[-3:], filename)
-    run(command)
-
-def build_adna(seq, filename='nuc.pdb'):
-    build(seq, filename=filename, nuc_type='adna')
-
-def build_bdna(seq, filename='nuc.pdb'):
-    build(seq, filename=filename, nuc_type='abdna')
-
-def build_arna(seq, filename='nuc.pdb'):
-    build(seq, filename=filename, nuc_type='arna')
