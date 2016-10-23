@@ -28,10 +28,10 @@ python setup.py install
     leap.build(command)
 ```
 
-- nab
+- builder
 ```python
-from jamber import nab
-nab.build_bdna(seq='AAAAAA', filename='nuc.pdb')
+from jamber.builder import build_bdna
+build_bdna(seq='AAAAAA')
 ```
 
 - build protein with given secondary structure
