@@ -4,8 +4,14 @@ from numpy.testing import assert_almost_equal as aa_eq
 import parmed as pmd
 import pytraj as pt
 from jamber import nab
+from jamber.base import amberbin
 from jamber.utils import tempfolder
 from jamber import nab, leap
+
+try:
+    nabin = amberbin('nab')
+except AssertionError:
+    nabin = None
 
 
 def test_nab():
