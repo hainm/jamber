@@ -25,7 +25,7 @@ python setup.py install
     seq = sequence {ALA ALA ALA}
     saveamberparm seq seq.prmtop seq.rst7
     """
-    leap.build(command)
+    leap.run(command)
 ```
 
 - builder
