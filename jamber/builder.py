@@ -55,6 +55,22 @@ def build_protein(seq, command):
         traj = pt.load(pdb_fn)
         return pt.make_structure(traj, command)
 
+def solvate(traj, water_model='tip3p', buffer=8.):
+    fn = 'my.pdb'
+    leap_command = """
+    source leaprc.protein.ff14SB
+    source leaprc.water.{water_model}
+    pdb = loadpdb {input_pdb}
+    solvateOct pdb TIP3PBOX {buffer}
+    savepdb pdb {input_pdb}
+    quit
+    """.format(water_model=water_model, input_pdb=fn, buffer=buffer)
+
+    with tempfolder():
+        traj.save(fn, overwrite=True)
+        leap.run(leap_command)
+        return pt.load(fn)
+
 def _nab_build(seq, filename, nuc_type='abdna'):
     command = """
     molecule m; 
