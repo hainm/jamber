@@ -20,15 +20,8 @@ conda create -y -n myenv python=$PYTHON_VERSION nose pytest numpy coverage pytes
 
 source activate myenv
 
-# ParmEd
-# pip install https://github.com/ParmEd/ParmEd/archive/2.5.1.tar.gz
-conda install parmed -c ambermd --yes
+# ambertools
+conda install ambertools -c hainm --yes
 
-# ambermini
-conda install ambermini -c omnia --yes
-
-# sander
-conda install sander -c ambermd --yes
-
-# pytraj
-pip install pytraj
+# overwrite pytraj from AMBER
+pip install pytraj --upgrade
