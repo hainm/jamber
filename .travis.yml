@@ -32,7 +32,7 @@ script:
     - py.test -vs jamber/
 
 after_success:
-    - echo "hello there"
+    - echo "hello"
 
 notifications:
   email: false
