@@ -29,5 +29,5 @@ if __name__ == '__main__':
         license = "MIT",
         url = "https://github.com/hainm/jamber",
         zip_safe = False,
-        packages = [ "jamber"],
+        packages = [ "jamber", "jamber.tests"],
     )

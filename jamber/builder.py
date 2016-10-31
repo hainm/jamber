@@ -46,6 +46,8 @@ def build_protein(seq, command):
     savepdb x %s
     """ % (seq, pdb_fn)
 
+    command_str = ' '.join(command) if isinstance(command, list) else command
+
     amberhome = os.getenv('AMBERHOME')
     if  os.path.exists(amberhome + '/dat/leap/cmd/leaprc.ff14SB'):
         leap_command = leap_command.replace('protein.ff14SB', 'ff14SB')
@@ -53,7 +55,8 @@ def build_protein(seq, command):
     with tempfolder():
         leap.run(leap_command)
         traj = pt.load(pdb_fn)
-        return pt.make_structure(traj, command)
+        pt.make_structure(traj, command_str)
+        return traj
 
 def solvate(traj, water_model='tip3p', buffer=8.):
     fn = 'my.pdb'
