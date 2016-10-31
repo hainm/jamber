@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/hainm/jamber.svg?branch=test)](https://travis-ci.org/hainm/jamber)
+[![Build Status](https://travis-ci.org/hainm/jamber.svg?branch=master)](https://travis-ci.org/hainm/jamber)
 
 Wrapping some of AmberTools's programs for Jupyter notebook. For now, this is only for fun and you should not rely on this unstable API. Hopefully it's still useful.
 
