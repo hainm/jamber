@@ -21,6 +21,7 @@ conda create -y -n myenv python=$PYTHON_VERSION nose pytest numpy coverage pytes
 source activate myenv
 
 # ambertools
+conda install libnetcdf
 conda install ambertools -c hainm --yes
 
 # overwrite pytraj from AMBER
