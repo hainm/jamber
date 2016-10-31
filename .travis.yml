@@ -30,6 +30,7 @@ script:
     - source devtools/travis-ci/setup_env.sh
     - pip install -e .
     - export AMBERHOME=`python -c 'import sys; print(sys.prefix)'`
+    - export LD_LIBRARY_PATH=$AMBERHOME/lib:$LD_LIBRARY_PATH # for nab
     - py.test -vs jamber/
 
 after_success:
