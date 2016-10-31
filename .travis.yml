@@ -27,7 +27,7 @@ install:
     
 script:
     - source devtools/travis-ci/setup_env.sh
-    - python setup.py install
+    - pip install -e .
     - export AMBERHOME=`python -c 'import sys; print(sys.prefix)'`
     - py.test -vs jamber/
 
