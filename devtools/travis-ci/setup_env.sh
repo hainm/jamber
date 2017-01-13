@@ -14,7 +14,7 @@ conda install --yes conda-build jinja2 anaconda-client pip
 
 # create myenv
 conda create -y -n myenv python=$PYTHON_VERSION
-conda install -y -n myenv nose pytest coverage pytest-coverage
+conda install -y -n myenv nose pytest coverage pytest-cov
 conda install -y -n myenv netcdf4 numpy nomkl
 
 source activate myenv
