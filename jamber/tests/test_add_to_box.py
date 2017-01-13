@@ -2,7 +2,7 @@ import parmed as pmd
 from jamber import add_to_box
 from jamber.utils import get_fn
 
-def test_solvate():
+def test_add_to_box():
     pdb_fn = get_fn('builder/ala10_hairpin.pdb')
     wat_fn = get_fn('water.pdb')
 
