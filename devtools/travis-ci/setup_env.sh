@@ -9,14 +9,13 @@ fi
 bash miniconda.sh -b
 
 export PATH=$HOME/miniconda/bin:$PATH
-# install stable version
-pip install conda
-
 conda update -n root conda-build --yes
 conda install --yes conda-build jinja2 anaconda-client pip
 
 # create myenv
-conda create -y -n myenv python=$PYTHON_VERSION nose pytest numpy coverage pytest-cov cython netcdf4
+conda create -y -n myenv python=$PYTHON_VERSION
+conda install -y -n myenv nose pytest coverage pytest-cov
+conda install -y -n myenv netcdf4 numpy nomkl
 
 source activate myenv
 
