@@ -6,13 +6,15 @@ from .compat import StringIO
 from .utils import tempfolder
 import subprocess
 
-def pack(traj, mol, n_copies, ig=8888, grid_spacing=0.2):
+def pack(traj, mol, n_copies, unitcells=None, ig=8888, grid_spacing=0.2):
     '''
 
     Parameters
     ----------
     traj : pytraj.Trajectory
     mol : pytraj.Trajectory
+    unitcells : None or np.ndarray, dim=2
+        if None, use box info from traj else use it
     n_copies : number of `mol`
     ig : int
         randome seed
@@ -33,7 +35,11 @@ def pack(traj, mol, n_copies, ig=8888, grid_spacing=0.2):
         for index, frame in enumerate(traj):
             pytraj.write_traj(input_pdb, traj=frame, top=traj.top, overwrite=True)
             parm = parmed.load_file(input_pdb)
-            parm.box = frame.box
+            if unitcells is not None:
+                parm.box = unitcells[index]
+            else:
+                assert frame.has_box(), 'must have box info'
+                parm.box = frame.box
             # add remark 290
             parm.save(input_pdb, overwrite=True)
             command = [
@@ -45,7 +51,10 @@ def pack(traj, mol, n_copies, ig=8888, grid_spacing=0.2):
                 '-G', str(grid_spacing),
                 '-o', out_pdb
             ]
-            subprocess.check_output(command, stderr=subprocess.PIPE)
-            new_traj_xyz[index] = pytraj.load(out_pdb).xyz
+            try:
+                subprocess.check_output(command, stderr=subprocess.STDOUT)
+                new_traj_xyz[index] = pytraj.load(out_pdb).xyz
+            except subprocess.CalledProcessError as e:
+                return e.output.decode()
         top = pytraj.load_topology(out_pdb)
     return pytraj.Trajectory(xyz=new_traj_xyz, top=top)
