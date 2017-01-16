@@ -1,26 +1,51 @@
 import parmed
+import pytraj
+import numpy as np
 from .base import amberbin
 from .compat import StringIO
 from .utils import tempfolder
 import subprocess
 
-def pack(parm, mol, n_copies, ig=8888, grid_spacing=0.2):
+def pack(traj, mol, n_copies, ig=8888, grid_spacing=0.2):
+    '''
+
+    Parameters
+    ----------
+    traj : pytraj.Trajectory
+    mol : pytraj.Trajectory
+    n_copies : number of `mol`
+    ig : int
+        randome seed
+    grid_spacing : float
+    '''
     add_to_box_exe = amberbin('AddToBox') or 'AddToBox'
     input_pdb = 'input.pdb'
     mol_pdb = 'mol.pdb'
     out_pdb = 'out.pdb'
+
+    assert mol.n_frames == 1
     
+    total_n_atoms = traj.n_atoms + mol.n_atoms * n_copies
+    new_traj_xyz = np.empty((traj.n_frames, total_n_atoms, 3), dtype='f8')
+
     with tempfolder():
-        parm.write_pdb(input_pdb)
-        mol.write_pdb(mol_pdb)
-        command = [
-            add_to_box_exe,
-            '-c', input_pdb,
-            '-a', mol_pdb,
-            '-na', str(n_copies),
-            '-IG', str(ig),
-            '-G', str(grid_spacing),
-            '-o', out_pdb
-        ]
-        subprocess.check_output(command, stderr=subprocess.PIPE)
-        return parmed.load_file(out_pdb)
+        mol.save(mol_pdb, overwrite=True)
+        for index, frame in enumerate(traj):
+            pytraj.write_traj(input_pdb, traj=frame, top=traj.top, overwrite=True)
+            parm = parmed.load_file(input_pdb)
+            parm.box = frame.box
+            # add remark 290
+            parm.save(input_pdb, overwrite=True)
+            command = [
+                add_to_box_exe,
+                '-c', input_pdb,
+                '-a', mol_pdb,
+                '-na', str(n_copies),
+                '-IG', str(ig),
+                '-G', str(grid_spacing),
+                '-o', out_pdb
+            ]
+            subprocess.check_output(command, stderr=subprocess.PIPE)
+            new_traj_xyz[index] = pytraj.load(out_pdb).xyz
+        top = pytraj.load_topology(out_pdb)
+    return pytraj.Trajectory(xyz=new_traj_xyz, top=top)
